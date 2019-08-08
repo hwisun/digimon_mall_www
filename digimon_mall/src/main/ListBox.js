@@ -17,7 +17,7 @@ class ListBox extends React.Component {
             <div className='index_item_list' onClick={this.goToMon}>
                 <img src={image} alt={name} />
                 <p>{name}</p>
-                <p>{price}</p>
+                <p>{this.props.count ? this.props.count + '개' : price+' P' }</p>
             </div>
         );
     }

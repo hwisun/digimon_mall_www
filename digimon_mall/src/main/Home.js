@@ -17,9 +17,6 @@ class Home extends React.Component {
         this.monsterStore.getMonster(this.props.match.params.generId);
     }
 
-    onDetailPage = () => {
-
-    }
 
     render() {   
         const lists = this.monsterStore.monsterList.map((list) => {    

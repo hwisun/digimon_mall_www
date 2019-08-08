@@ -3,6 +3,7 @@ import Axios from 'axios'
 
 export default class MonsterStore {
     @observable monsterList = [];
+    @observable myMonsList = [];
     @observable monsterDatail = '';
 
     constructor(rootStore) {
@@ -32,7 +33,26 @@ export default class MonsterStore {
         Axios.get(URL)
             .then(response => {
                 // if (!this.monsterList) this.monsterList = [];
-                this.monsterDatail = response.data;     
+                this.monsterDatail = response.data;
+            });
+    }
+
+    @action
+    getMyMonster() {
+        let URL = this.rootStore.BASE_URL + '/me/mons/';
+        Axios.get(
+            URL,
+            {
+                headers: {
+                    'Authorization': this.rootStore.authStore.authToken
+                }
+            }
+        )
+            .then(response => {
+                for (const data of response.data) {
+                    data.list.monster.image = this.rootStore.BASE_URL + data.list.monster.image
+                }
+                this.myMonsList = response.data;
             });
     }
 

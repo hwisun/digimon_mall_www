@@ -32,7 +32,7 @@ class Monster extends React.Component {
             }
         )
             .then((response) => {
-                history.push('/me/mons/')
+                history.push('/me/mons')
             })
             .catch((error) => {
                 if (error.response.status === 401) {
