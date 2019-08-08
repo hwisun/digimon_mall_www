@@ -1,36 +1,30 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react';
+import ListBox from './ListBox';
 
 @inject('rootStore')
 @observer
 class Home extends React.Component {
+    monsterStore = this.props.rootStore.monsterStore
 
     componentDidUpdate(prevProps) {
         if (this.props.match.params.generId !== prevProps.match.params.generId) {
-            const { monsterStore } = this.props.rootStore
-            monsterStore.generId = this.props.match.params.generId
-            monsterStore.getMonster();
+            this.monsterStore.getMonster(this.props.match.params.generId);
         }
     }
 
     componentDidMount() {
-        const { monsterStore } = this.props.rootStore
-        monsterStore.getMonster();
+        this.monsterStore.getMonster(this.props.match.params.generId);
     }
 
-    render() {
-        const { monsterStore } = this.props.rootStore
-        
-        const lists = monsterStore.monsterList.map(list => {    
-            const image = list.monster.image
-            const name = list.monster.title
-            const price = list.price
+    onDetailPage = () => {
+
+    }
+
+    render() {   
+        const lists = this.monsterStore.monsterList.map((list) => {    
             return(
-                <div key={list.id} className='index_item_list'>
-                    <img src={image} alt={name}/>
-                    <p>{name}</p>
-                    <p>{price}</p>
-                </div>
+                <ListBox key={list.id} list={list} />  
             )
         })
 

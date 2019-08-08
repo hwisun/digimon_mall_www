@@ -9,7 +9,7 @@ import RootStore from './store/RootStore';
 
 const rootStore = new RootStore();
 
-ReactDOM.render(
+    ReactDOM.render(
     <Provider rootStore={rootStore}>
         <App />
     </Provider>,
