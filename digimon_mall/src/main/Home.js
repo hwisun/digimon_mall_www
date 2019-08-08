@@ -1,35 +1,27 @@
 import React from 'react'
-import Axios from 'axios'
-import { inject } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 
 @inject('rootStore')
+@observer
 class Home extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = { lists: [] }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.match.params.generId !== prevProps.match.params.generId) {
+            const { monsterStore } = this.props.rootStore
+            monsterStore.generId = this.props.match.params.generId
+            monsterStore.getMonster();
+        }
     }
 
     componentDidMount() {
-        this.getMonster();
+        const { monsterStore } = this.props.rootStore
+        monsterStore.getMonster();
     }
-
-    getMonster() {
-        const { rootStore } = this.props
-        const URL = rootStore.BASE_URL + '/lists/';
-        Axios.get(URL)
-            .then(response => {
-                const lists = response.data;
-                this.setState({
-                    lists: lists
-                });
-            });
-    }
-
 
     render() {
-        console.log(this.state.lists);
-        const lists = this.state.lists.map(list => {
+        const { monsterStore } = this.props.rootStore
+        
+        const lists = monsterStore.monsterList.map(list => {    
             const image = list.monster.image
             const name = list.monster.title
             const price = list.price
