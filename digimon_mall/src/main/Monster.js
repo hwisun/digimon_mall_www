@@ -1,6 +1,7 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
+import Axios from 'axios'
 
 @inject('rootStore')
 @observer
@@ -18,10 +19,34 @@ class Monster extends React.Component {
         }
     }
 
+    onPurchase = () => {
+        const { rootStore, history } = this.props;
+        const listId = rootStore.monsterStore.monsterDatail.id;
+        Axios.post(
+            rootStore.BASE_URL + '/lists/' + listId + '/purchase/',
+            {},
+            {
+                headers: {
+                    'Authorization': rootStore.authStore.authToken
+                }
+            }
+        )
+            .then((response) => {
+                history.push('/me/mons/')
+            })
+            .catch((error) => {
+                if (error.response.status === 401) {
+                    history.push('/login/')
+                }
+                if (error.response.status === 402) {
+                    alert('포인트가 부족합니다.')
+                }
+            })
+    }
+
     render() {
         const monsterDatail = this.props.rootStore.monsterStore.monsterDatail;
-        console.log(monsterDatail);
-        
+        console.log(monsterDatail.id);
         const image = monsterDatail ? monsterDatail.monster.image : null;
         const name = monsterDatail ? monsterDatail.monster.title : null;
         const gener = monsterDatail ? monsterDatail.gener.title : null;
@@ -55,6 +80,9 @@ class Monster extends React.Component {
                         - 소개<br />
                         <div className='desc'>{desc}</div>
                     </span>
+                    <br />
+                    <button onClick={this.onPurchase}>구입하기</button>
+                    <button>장바구니 담기</button>
                 </div>
             </div>
         )

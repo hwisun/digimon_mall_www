@@ -6,6 +6,7 @@ import Home from './main/Home';
 import Footer from './main/Footer';
 import Header from './main/Header';
 import Monster from './main/Monster';
+import Login from './main/Login';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route exact path='/' component={Home} />
         <Route exact path='/geners/:generId' component={Home} />
         <Route exact path='/mons/:monId' component={Monster} />
+        <Route exact path='/login' component={Login} />
       </Switch>
       <Footer />
     </Router>
