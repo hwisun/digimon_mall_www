@@ -5,23 +5,27 @@ import { inject, observer } from 'mobx-react';
 @inject('rootStore')
 @observer
 class MyMons extends React.Component {
-    monsterStore = this.props.rootStore.monsterStore
+
 
     componentDidMount() {
-        this.monsterStore.getMyMonster();
+        const { rootStore } = this.props;
+        const { monsterStore } = rootStore;
+        monsterStore.getMyMonster();
     }
 
     render() {
-        console.log(this.monsterStore.myMonsList);
-        
-        const lists = this.monsterStore.myMonsList.map((list) => {
+        const { rootStore } = this.props;
+        const { monsterStore } = rootStore;
+        const { myMonsList } = monsterStore;
+        const lists = myMonsList.map((list) => {
             return (
-                <ListBox key={list.list.id} list={list.list} count={list.count}/>
+                <ListBox key={list.list.id} list={list.list} count={list.count} />
             )
         })
 
-        return(
+        return (
             <div id='containel'>
+                <h3>장바구니 목록</h3>
                 {lists}
             </div>
         )

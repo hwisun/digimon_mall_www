@@ -56,13 +56,24 @@ class Header extends React.Component {
                             <Link to='/login'>Login</Link>
                     }
                 </div>
-                <div className='header_r'>
-                    {
-                        isLoggedIn ?
-                            <Link to='/me/mons'>MyMons</Link> :
-                            null
-                    }
-                </div>
+                {
+                    isLoggedIn ?
+                        <div className='header_r'>
+                            <Link to='/cart/mons'>CartMons</Link>
+                        </div>
+
+                        :
+                        null
+                }
+                {
+                    isLoggedIn ?
+                        <div className='header_r'>
+                            <Link to='/me/mons'>MyMons</Link>
+                        </div>
+
+                        :
+                        null
+                }
             </header>
         )
     }

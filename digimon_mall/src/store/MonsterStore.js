@@ -18,11 +18,6 @@ export default class MonsterStore {
         }
         Axios.get(URL)
             .then(response => {
-                if (generId) {
-                    for (const data of response.data) {
-                        data.monster.image = this.rootStore.BASE_URL + data.monster.image
-                    }
-                }
                 this.monsterList = response.data;
             });
     }
@@ -49,9 +44,6 @@ export default class MonsterStore {
             }
         )
             .then(response => {
-                for (const data of response.data) {
-                    data.list.monster.image = this.rootStore.BASE_URL + data.list.monster.image
-                }
                 this.myMonsList = response.data;
             });
     }
