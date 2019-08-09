@@ -1,6 +1,8 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
+import { inject } from 'mobx-react';
 
+@inject('rootStore')
 class ListBox extends React.Component {
 
     goToMon = () => {
@@ -9,10 +11,21 @@ class ListBox extends React.Component {
     }
 
     render() {
-        const list = this.props.list;
-        const image = list.monster.image
-        const name = list.monster.title
-        const price = list.price
+        const { list } = this.props;
+        const image = list.monster.image;
+        const name = list.monster.title;
+        const price = list.price;
+        // const itme = this.props.list.times.substring(0, 19)
+
+        // if (!this.props.list.times.substring(0, 19)) {
+        //     if (rootStore.times === this.props.list.times.substring(0, 19)) {
+        //         const br = true;
+        //     } else {
+        //         const br = false;
+        //     }
+        // }
+        // rootStore.times = list.times.substring(0, 19)
+        
         return (
             <div className='index_item_list' onClick={this.goToMon}>
                 <img src={image} alt={name} />

@@ -1,6 +1,7 @@
 import MonsterStore from "./MonsterStore";
 import AuthStore from "./AuthStore";
 import CartStore from "./CartStore";
+import UserStore from "./UserStore";
 
 export default class RootStore {
     constructor() {
@@ -8,5 +9,7 @@ export default class RootStore {
         this.monsterStore = new MonsterStore(this);
         this.authStore = new AuthStore(this);
         this.cartStore = new CartStore(this);
+        this.userStore = new UserStore(this);
+        this.times = '';
     }
 }

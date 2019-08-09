@@ -63,14 +63,15 @@ class Header extends React.Component {
                         </div>
 
                         :
-                        null
+                        <div className='header_r'>
+                            <Link to='/register'>Register</Link>
+                        </div>
                 }
                 {
                     isLoggedIn ?
                         <div className='header_r'>
                             <Link to='/me/mons'>MyMons</Link>
                         </div>
-
                         :
                         null
                 }

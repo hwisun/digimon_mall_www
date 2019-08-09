@@ -5,7 +5,9 @@ import ListBox from './ListBox';
 @inject('rootStore')
 @observer
 class Home extends React.Component {
-    monsterStore = this.props.rootStore.monsterStore
+    monsterStore = this.props.rootStore.monsterStore;
+    authStore = this.props.rootStore.authStore;
+    userStore = this.props.rootStore.userStore;
 
     componentDidUpdate(prevProps) {
         if (this.props.match.params.generId !== prevProps.match.params.generId) {
@@ -19,6 +21,7 @@ class Home extends React.Component {
 
 
     render() {   
+        console.log(this.userStore.user.username)
         const lists = this.monsterStore.monsterList.map((list) => {    
             return(
                 <ListBox key={list.id} list={list} />  
@@ -27,6 +30,7 @@ class Home extends React.Component {
 
         return (
             <div id='containel'>
+                <h3>몬스터 리스트 페이지</h3>
                 {lists}
             </div>
         )

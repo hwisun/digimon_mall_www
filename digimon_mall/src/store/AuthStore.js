@@ -1,10 +1,10 @@
-import { observable, computed, action } from 'mobx'
+import { observable, computed, action } from 'mobx';
 
 export default class AuthStore {
     @observable authToken = null;
 
     constructor(rootStore) {
-        this.rootStore = rootStore
+        this.rootStore = rootStore;
         this.authToken = localStorage.getItem('auth_token');
     }
 

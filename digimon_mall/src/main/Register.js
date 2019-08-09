@@ -1,17 +1,16 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Axios from 'axios'
 import { withRouter } from 'react-router-dom';
-
 import { inject } from 'mobx-react';
 
 @inject('rootStore')
-class Login extends Component {
+class Register extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            username: 'admin',
-            password: 'admin',
+            username: '',
+            password: '',
         }
     }
 
@@ -28,28 +27,23 @@ class Login extends Component {
         }
     }
 
-    onLogin = () => {
+    onRegister = () => {
         const { rootStore, history } = this.props
         Axios.post(
-            rootStore.BASE_URL + '/o/token/',
+            rootStore.BASE_URL + '/users/',
             {
-                grant_type: 'password',
-                client_id: 'RkMq3QuF2GJZitpMA6Ntp75nSdsFsX1AnRcRaKWj',
                 username: this.state.username,
                 password: this.state.password
             }
         ).then((response) => {
-            const token = response.data;
-            rootStore.authStore.setToken(token);
-            rootStore.userStore.setUser()
             history.push('/');
         })
     }
 
     render() {
-        return (
+        return(
             <div id='containel'>
-                <h3>로그인 페이지</h3>
+                <h3>회원가입 페이지</h3>
                 <div id='login'>
                     <div>
                         <label>아이디 : </label>
@@ -64,13 +58,12 @@ class Login extends Component {
                             value={this.state.password}
                             onChange={this.onInputChanged}
                         />
-
                     </div>
-                    <button onClick={this.onLogin}>로그인</button>
+                    <button onClick={this.onRegister}>회원가입</button>
                 </div>
             </div>
-        );
+        )
     }
 }
 
-export default withRouter(Login);
+export default withRouter(Register);

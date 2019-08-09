@@ -17,9 +17,11 @@ class MyMons extends React.Component {
         const { rootStore } = this.props;
         const { monsterStore } = rootStore;
         const { myMonsList } = monsterStore;
+            
         const lists = myMonsList.map((list) => {
+            
             return (
-                <ListBox key={list.list.id} list={list.list} count={list.count} />
+                <ListBox key={list.list.id} list={list.list} count={list.count} times={list.times} />
             )
         })
 

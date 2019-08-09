@@ -71,6 +71,7 @@ class Monster extends React.Component {
 
         return (
             <div id='containel'>
+                <h3>몬스터 상세페이지</h3>
                 <div className='detail_item_list'>
                     <img src={monImage} alt={monName} />
                     <span> 

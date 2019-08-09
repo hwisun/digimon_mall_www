@@ -10,6 +10,7 @@ import Login from './main/Login';
 import MyMons from './main/MyMons';
 import CartMons from './main/CartMons';
 import ObserverTest from './observer/ObserverTest';
+import Register from './main/Register';
 
  function App() {
     return (
@@ -23,6 +24,7 @@ import ObserverTest from './observer/ObserverTest';
           <Route exact path='/cart/mons' component={CartMons} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/observer-test' component={ObserverTest} />
+          <Route exact path='/register' component={Register} />
         </Switch>
         <Footer />
       </Router>

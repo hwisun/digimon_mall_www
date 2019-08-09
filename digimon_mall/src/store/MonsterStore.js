@@ -44,6 +44,8 @@ export default class MonsterStore {
             }
         )
             .then(response => {
+                console.log(response.data);
+                
                 this.myMonsList = response.data;
             });
     }
