@@ -1,8 +1,7 @@
 import { observable, action, computed } from "mobx";
 import Axios from 'axios'
-import { withRouter } from 'react-router-dom'
 
-class CartStore {
+export default class CartStore {
     @observable cartMons = [];
 
     constructor(rootStore) {
@@ -35,6 +34,33 @@ class CartStore {
         this.saveCartMons();
     }
 
+    @action
+    purchaseCartMons() {
+        const mons = [];
+        let URL = this.rootStore.BASE_URL + '/lists/purchase/';
+        for (let cartMon of this.cartMons) {
+            mons.push({
+                mon_id: cartMon.mons.id,
+                count: cartMon.count
+            })
+        }
+        Axios.post(
+            URL,
+            {
+                mons
+            },
+            {
+                headers: {
+                    'Authorization': this.rootStore.authStore.authToken
+                }
+            }
+        ).then((response) => {
+            this.clearCartMons();
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
     @computed
     get cartMonsCount() {
         return this.cartMons.length;
@@ -50,5 +76,3 @@ class CartStore {
         localStorage.setItem('cart_mons', JSON.stringify(this.cartMons))
     }
 }
-
-export default withRouter(CartStore);
